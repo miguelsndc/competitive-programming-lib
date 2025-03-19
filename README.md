@@ -4,24 +4,28 @@ This project consists of a template for competitive programming teams, containin
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
+- [Competitive Programming Template](#competitive-programming-template)
+  - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
-    - [Cloning this template](#cloning-this-template)
-    - [Team information](#team-information)
-    - [Generating PDF](#generating-pdf)
-        - [Automatic generation](#automatic-generation)
+  - [Cloning this template](#cloning-this-template)
+  - [Team information](#team-information)
+  - [Generating PDF](#generating-pdf)
+    - [Ubuntu](#ubuntu)
+    - [Arch](#arch)
+    - [Generating](#generating)
+    - [Automatic generation](#automatic-generation)
 - [How to Use](#how-to-use)
-    - [Notebook](#notebook)
-        - [Categories](#categories)
-        - [Adding a code](#adding-a-code)
-        - [Ommiting files from PDF](#ommiting-files-from-pdf)
-        - [Examples of notebook](#examples-of-notebook)
-    - [Theoretical](#theoretical)
-        - [Categories](#categories-1)
-        - [Adding a theoretical information](#adding-a-theoretical-information)
-        - [Ommiting files from PDF](#ommiting-files-from-pdf-1)
-        - [Examples of theoretical](#examples-of-theoretical)
-    - [Modifying LaTeX](#modifying-latex)
+  - [Notebook](#notebook)
+    - [Categories](#categories)
+    - [Adding a code](#adding-a-code)
+    - [Ommiting files from PDF](#ommiting-files-from-pdf)
+    - [Examples of notebook](#examples-of-notebook)
+  - [Theoretical](#theoretical)
+    - [Categories](#categories-1)
+    - [Adding a theoretical information](#adding-a-theoretical-information)
+    - [Ommiting files from PDF](#ommiting-files-from-pdf-1)
+    - [Examples of theoretical](#examples-of-theoretical)
+  - [Modifying LaTeX](#modifying-latex)
 - [Contributors](#contributors)
 
 # Getting Started
@@ -67,6 +71,7 @@ After installing the above dependencies, run the following commands to generate 
 ```bash
 python3 generate_latex/generate_notebook.py
 ```
+
 
 ```bash
 python3 generate_latex/generate_theoretical.py
