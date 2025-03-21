@@ -106,7 +106,7 @@ def main():
             subprocess.check_call(cmd, stdout=DEVNULL)
             subprocess.check_call(cmd, stdout=DEVNULL)
         except Exception:
-            print("Erro na transformação de LaTex para pdf.")
+            print("Erro na transformacao de LaTex para pdf.")
             print("Execute manualmente para entender o erro:")
             print('pdflatex -interaction=nonstopmode -halt-on-error generate_latex/notebook.tex')
             exit(1)

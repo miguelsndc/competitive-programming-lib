@@ -1,0 +1,34 @@
+\subsection{Counting}
+Combinatorics and counting principles:
+
+\begin{itemize}
+    \item \textbf{Stars and Bars}:
+        \[
+        \text{Number of ways to distribute } n \text{ identical items into } k \text{ distinct bins} = \binom{n + k - 1}{k - 1}
+        \]
+    \item \textbf{Vandermonde's Identity}:
+        \[
+        \sum_{k=0}^r \binom{m}{k} \binom{n}{r - k} = \binom{m + n}{r}
+        \]
+    \item \textbf{Catalan Numbers}:
+        \[
+        C_n = \frac{1}{n + 1} \binom{2n}{n}
+        \]
+        Applications: Valid parentheses, binary trees, Dyck paths.
+    \item \textbf{Inclusion-Exclusion Principle}:
+        \[
+        |A \cup B| = |A| + |B| - |A \cap B|
+        \]
+    \item \textbf{Pigeonhole Principle}:
+        \[
+        \text{If more than } k \text{ items are put into } k \text{ bins, then at least one bin must contain more than one item.}
+        \]
+    \item \textbf{Permutations with Repetitions}:
+        \[
+        \text{Number of ways to arrange } n \text{ objects where there are } k_1 \text{ objects of one kind, } k_2 \text{ of another, etc. is: } \frac{n!}{k_1!k_2! \cdots k_r!}
+        \]
+    \item \textbf{r-Permutations}:
+        \[
+        P(n, r) = \frac{n!}{(n - r)!} \quad \text{for the number of ways to arrange } r \text{ items out of } n \text{ distinct items}.
+        \]
+\end{itemize}
