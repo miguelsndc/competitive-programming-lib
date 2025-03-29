@@ -7,9 +7,4 @@ Final
   - C Coconuts
   - F Four is too much
   - H Homo Programmius
-  - I Intense Duel
   - K Known Issue
-
-1013 div3
-  - F
-  - G 
