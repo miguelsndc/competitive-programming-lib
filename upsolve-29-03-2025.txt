@@ -1,0 +1,37 @@
+Coisas Interessantes:
+    Segtree com Lazy Update
+    Sweep Line
+    Color Update
+
+
+
+To-do:
+    D - The Gingerbread Man and Traffic
+        Info:
+            O melhor jeito de chegar independe do semáforo, chega no melhor tempo possível e espera até ficar vermelho
+            Quanto tempo esperar em cada nó ? Sinais alternam, então uma continha com mod resolve
+            custo acumulado % (ri + gi) -> qual momento do ciclo se está
+            Dijsktra tempo pra chegar + tempo q vc espera pra ficar vermelho caso não esteja
+    F - Far Far Away
+        Info: 
+            A subarvore que tem o destino fica por ultimo, resolver todas as outras subárvores antes.
+            Se a subárvore tiver comida, é preciso descer e dps voltar, então se a subarvore tiver comida, 
+            acrescenta 2 e desce, ignorando os que nao tem comida.
+            Quando entrar na subarvore que tem o destino, vc desce e não precisa voltar, então soma 1 pras arestas
+            da subarvore com destino.
+            Preprocessar a arvore contando quantas comidas tem em cada subarvore (subtree_cnt[node])
+
+            ------
+            
+            Enraíza a arvore no destino
+            Pra cada nó qual o menor custo pra descer por todas as comidas dele e voltar pra ele ?
+
+            Distancia do nó pra todos os filhos
+    G - Time is Moinkney
+        (Sem dados)
+    H - Humpty Dumpty
+        (Sem dados)
+    I - The Tale of the Fisherman and the Fish
+        (Sem dados)
+    J - The Queen of Hearts
+        (Sem dados)

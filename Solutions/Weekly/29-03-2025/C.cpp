@@ -7,26 +7,6 @@ using u64 = unsigned long long;
 constexpr i64 inf = 1E18;
 constexpr int maxn = 1e6;
 
-vector<int> bit(maxn);
-
-void add(int pos, int val) {
-    ++pos;
-    while(pos < maxn) {
-        bit[pos] += val;
-        pos += (pos & (-pos));
-    }
-}
-
-int query(int pos) {
-    ++pos;
-    int sum = 0;
-    while(pos > 0) {
-        sum += bit[pos];
-        pos -= (pos & (-pos));
-    }
-    return sum;
-}
-
 int main()
 {
     ios_base::sync_with_stdio(0);
@@ -45,14 +25,19 @@ int main()
         a.push_back(t);
         queries[i] = t;
     }
+    vector<int> ps(maxn);
     sort(begin(a), end(a));
+    a.resize(unique(begin(a), end(a)) - begin(a));
     for (int i = 0; i < n; i++) {
         int left = lower_bound(begin(a), end(a), v[i].first) - begin(a);
         int right = lower_bound(begin(a), end(a), v[i].second) - begin(a);
-        add(left, 1);
-        add(right + 1, -1);
+        ps[left]++;
+        ps[right + 1]--;
+    }
+    for (int i = 0; i < maxn; i++) {
+        ps[i + 1] += ps[i];
     }
     for (int qu: queries) {
-        cout << query(lower_bound(begin(a), end(a), qu) - begin(a)) << '\n';
+        cout << ps[lower_bound(begin(a), end(a), qu) - begin(a)] << '\n';
     }
 }
