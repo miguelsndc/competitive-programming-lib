@@ -1,2 +1,4 @@
 ./notebook.pdf
 ./theoretical.pdf
+*.json
+**/.cph/*
