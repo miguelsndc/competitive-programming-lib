@@ -4,7 +4,6 @@ Coisas Interessantes:
     Color Update
 
 
-
 To-do:
     D - The Gingerbread Man and Traffic
         Info:
@@ -28,7 +27,14 @@ To-do:
 
             Distancia do nó pra todos os filhos
     G - Time is Moinkney
-        (Olhar editorial)
+        É sempre ótimo escolher tijolos enquanto o preço do tijolo for menor do que o preço
+        de três canudos. então basta combinar as sequencias de tijolos e canudos numa só
+        e depois usar two pointers pra achar a defesa maxima
+        calcular prefix sums pra ter defesa e custo de qualquer sequencia dessas em O(1)
+        depois pra cada numero de palitos, escolhe o maximo possivel da sequencia de tijolo/canudos
+        e depois completa o resto com canudos
+        prefix sums até t
+        resposta é o maximo dessa iteraçao
     H - Humpty Dumpty
         (Olhar editorial)
     I - The Tale of the Fisherman and the Fish

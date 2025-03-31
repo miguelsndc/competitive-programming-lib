@@ -6,6 +6,7 @@
 */
 
 const int MAXN = 2e5 +5;
+template<typename T>
 struct UnionFind {
     int parents[MAXN];
     int sizes[MAXN];
