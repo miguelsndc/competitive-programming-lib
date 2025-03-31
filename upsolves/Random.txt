@@ -2,6 +2,8 @@ AtCoder:
   397
     - F Variety Split Hard
     - G Maximize Distance
+  399:
+    D, E, F, G
 
 Final
   - C Coconuts
