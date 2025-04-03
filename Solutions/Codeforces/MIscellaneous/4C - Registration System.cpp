@@ -1,30 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long int
-#define MOD 1000000007
-#define ii pair<int, int>
-#define vi vector<int>
-#define fi first
-#define se second
-#define rep(var, k, n) for (int var = k; var < n; var++)
-#define repi(var, k, n) for (int var = k; var <= n; var++)
-#define se second
-const int maxn = 2e5 + 5;
+using i64 = long long;
+using u32 = unsigned;
+using u64 = unsigned long long;
+constexpr i64 inf = 1E18;
+constexpr int mod = 1e9 + 7, maxn = 1e5 + 5;
+
+void solve() {
+    
+}
 
 int main() 
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int n;cin>>n;
-    map<string, int> mp;
-    rep(i,0,n) {
-        string s; cin >> s;
-        if (mp[s] == 0) {
-            cout << "OK\n";
-        } else {
-            cout << s << mp[s] << '\n';
-        }
-        mp[s]++;
+    int tt = 1; // cin >> tt;
+    while(tt--) {
+        solve();
     }
 }

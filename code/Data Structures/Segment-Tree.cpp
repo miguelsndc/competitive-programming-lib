@@ -1,20 +1,22 @@
 // 1-Based Segment Tree - Range Queries
 const int MAXN = 2e5 + 5;
 
-int n; // numero de nodes
 template<typename T>
 struct SegmentTree {
-    int tree[8 * MAXN];
-    const int NEUTRAL = 1e9 + 9;
-    SegmentTree() {
-        memset(tree, 0, sizeof tree);
+    private:
+        vector<T> tree;
+        const int NEUTRAL = 1e9 + 9;
+        const int n;
+    public:
+
+    SegmentTree(int _n): n(_n) {
+        tree.resize(4 * n);
     }
 
-    int join(int a, int b) {
-    }
+    int join(int a, int b) {}
 
     // O(n) a is a 1-based array
-    void build(int a[], int l = 1, int r = n, int v = 1) {
+    void build(vector<T> &a, int l = 1, int r = n, int v = 1) {
         if (l == r) {
             tree[v] = a[l];
             return;
