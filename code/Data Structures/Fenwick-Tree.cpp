@@ -4,28 +4,23 @@
 
 template<typename T = int>
 struct FenwickTree {
-    vector<T> bit, arr;
+    vector<T> bit(maxn), arr(maxn);
 
-    FenwickTree(int size) {
-        bit.assign(size + 1, 0);
-        arr.assign(size + 1, 0);
-    }
-	// O(log(n))
-    void set(int pos, int val) {
-        add(pos, val - arr[pos]);
-    }
-    
 	// O(log(n))
     void add(int pos, int val) {
-        arr[pos] += val;
-        ++pos;
-        for (; pos <= n; pos += (pos & (-pos))) bit[pos] += val;
+        for (int i = pos + 1; i < maxn; i += (i & (-i))) bit[i] += val;
     }
+
+	// O(log(n))
+    void pset(int pos, int val) {
+        int delta = val - arr[pos]; arr[pos] = val; 
+        add(pos, delta);
+    }
+
 	// O(log(n))
     T query(int pos) {
-        ++pos;
         T sum = 0;
-        for (; pos > 0; pos -= (pos & (-pos))) sum += bit[pos];
+        for (int i = pos + 1; i > 0; i -= (i & (-i))) sum += bit[i];
         return sum;
     }
 };
