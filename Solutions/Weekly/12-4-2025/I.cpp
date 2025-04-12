@@ -1,24 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define all(x) (x).begin(), (x).end()
+
 using i64 = long long;
 using u32 = unsigned;
 using u64 = unsigned long long;
+
 constexpr i64 inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 1e5 + 5;
 
 void solve() {
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    int i; cin >> i;
-    vector<int> v(4); v[i] = 1;
-    for (int i = 0; i < 3; i++) {
-        int l, r; cin >> l >> r;
-        swap(v[l], v[r]);
+    int n; cin >> n;
+    vector<int> v(n);
+    for(int &x: v) cin >> x;
+    sort(all(v));
+    int k = v[0], cnt = 0;
+    for (int i = 1; i < n; i++) {
+        int diff = v[i] - k;
+        if (v[i] - k != 1) {
+            cnt += v[i] - k - 1;
+        }
+        k = v[i];
     }
-    for (int i = 1; i <= 3; i++) {
-        if (v[i]) cout << i;
-    }
+    cout << cnt << '\n';
 }
 
 int main() 
