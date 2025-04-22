@@ -19,43 +19,32 @@ void dbg(const char* names, T... args) {
 using i64 = long long;
 
 constexpr i64 inf = 1E18;
-constexpr int mod = 1e9 + 7, maxn = 1e5 + 5;
-
-vector<int> par(maxn), sz(maxn, 1), sum(maxn);
-
-int find(int a) {
-    return par[a] == a ? a : par[a] = find(par[a]);
-}
-
-int join(int a, int b) {
-    int ar = find(a), br = find(b);
-    if (ar == br) return false;
-    if (sz[ar] < sz[br]) swap(ar, br);
-    sz[ar] += sz[br];
-    sum[ar] += sum[br];
-    par[br] = ar;
-    return true;
-}
+constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
-    int n, m;
-    while ((cin >> n >> m)) {
-        iota(all(par), 0);
-        iota(all(sum), 0);
+    int q;
+    cin >> q;
+    queue<int> line;
+    for (int i = 0; i < q; i++) {
         int t;
         cin >> t;
         if (t == 1) {
-        } else if (t == 2) {
+            int x;
+            cin >> x;
+            line.push(x);
         } else {
+            if (line.size()) {
+                cout << line.front() << '\n';
+                line.pop();
+            }
         }
     }
 }
 
 int main() {
-    ios_base::sync_with_stdio;
-
+    ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int tt = 1;
+    int tt = 1;  // cin >> tt;
     while (tt--) {
         solve();
     }
