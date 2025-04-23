@@ -22,6 +22,13 @@ constexpr i64 inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
+    string s;
+    cin >> s;
+    for (char c : s) {
+        if (c >= 'A' and c <= 'Z') {
+            cout << c;
+        }
+    }
 }
 
 int main() {

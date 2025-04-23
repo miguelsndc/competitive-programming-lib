@@ -22,6 +22,36 @@ constexpr i64 inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> r(m);
+    for (int i = 0; i < m; i++) {
+        int k;
+        cin >> k;
+        r[i].resize(k);
+        for (int j = 0; j < k; j++) {
+            cin >> r[i][j];
+        }
+    }
+    map<int, int> mp;
+    vector<int> b(n), result(n);
+    for (int i = 0; i < n; i++) {
+        cin >> b[i];
+        mp[b[i]] = i;
+    }
+
+    for (int i = 0; i < m; i++) {
+        int fades = 0;
+        for (int j = 0; j < r[i].size(); j++) {
+            fades = max(fades, mp[r[i][j]]);
+        }
+        result[fades]++;
+    }
+    int cur = 0;
+    for (int i = 0; i < n; i++) {
+        cur += result[i];
+        cout << cur << '\n';
+    }
 }
 
 int main() {

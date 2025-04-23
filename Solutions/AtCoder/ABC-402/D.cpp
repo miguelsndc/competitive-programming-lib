@@ -20,8 +20,22 @@ using i64 = long long;
 
 constexpr i64 inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
+const double pi = acos(-1.0);
 
 void solve() {
+    int n, m;
+    cin >> n >> m;
+    map<int, int> cnt;
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        cnt[(a + b) % n]++;
+    }
+    i64 ans = 1LL * m * (m - 1) / 2;
+    for (auto [_, x] : cnt) {
+        ans -= 1LL * x * (x - 1) / 2;
+    }
+    cout << ans << '\n';
 }
 
 int main() {

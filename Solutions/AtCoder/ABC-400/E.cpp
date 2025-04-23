@@ -19,36 +19,24 @@ void dbg(const char* names, T... args) {
 using i64 = long long;
 
 constexpr i64 inf = 1E18;
-constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
-
-int value[8], cost[8], n, x;
-double prob[8];
+constexpr int mod = 1e9 + 7, maxn = 1e6 + 5;
 
 void solve() {
-    cin >> n >> x;
-    for (int i = 0; i < n; i++) {
-        cin >> value[i] >> cost[i] >> prob[i];
-        prob[i] /= 100.0;
+    vector<int> A(maxn);
+    for (int i = 2; i < maxn; i++) {
+        if (A[i] == 0)
+            for (int j = i; j < maxn; j += i) A[j]++;
     }
-    double dp[(1 << n)][x + 1];
-    for (int i = 0; i < (1 << n); i++) {
-        for (int j = 0; j <= x; j++) {
-            dp[i][j] = 0;
-        }
+    vector<i64> v;
+    for (i64 i = 2; i < maxn; i++)
+        if (A[i] == 2) v.push_back(i * i);
+    int q;
+    cin >> q;
+    while (q--) {
+        i64 x;
+        cin >> x;
+        cout << *prev(upper_bound(all(v), x)) << '\n';
     }
-
-    for (int spent = x; spent >= 0; spent--) {
-        for (int mask = 0; mask < (1 << n); mask++) {
-            for (int i = 0; i < n; i++) {
-                if ((spent + cost[i] > x) || mask == (mask | (1 << i))) {
-                    continue;
-                }
-                double val = prob[i] * (dp[mask | (1 << i)][spent + cost[i]] + value[i]) + (1 - prob[i]) * dp[mask][spent + cost[i]];
-                dp[mask][spent] = max(dp[mask][spent], val);
-            }
-        }
-    }
-    cout << setprecision(20) << fixed << dp[0][0] << '\n';
 }
 
 int main() {
