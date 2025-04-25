@@ -22,29 +22,21 @@ constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
-    ll n, h;
-    cin >> n >> h;
-    vector<ll> start(n + 1);
-    vector<ll> ps(n + 1);
-    for (int i = 1; i <= n; i++) {
-        int end;
-        cin >> start[i] >> end;
-        ps[i] = ps[i - 1] + end - start[i];
-    }
-    ll ans = 0;
-    for (int i = 1; i <= n; i++) {
-        int l = i, r = n;
-        while (l != r) {
-            int mid = (l + r + 1) / 2;
-            if ((start[mid] - start[i]) - (ps[mid - 1] - ps[i - 1]) < h) {
-                l = mid;
-            } else {
-                r = mid - 1;
-            }
-        }
-        ans = max(ans, h + (ps[l] - ps[i - 1]));
-    }
-    cout << ans << '\n';
+    int r, g;
+    cin >> r >> g;
+
+    int h = 1, dp[maxn];
+    memset(dp, 0, sizeof dp);
+    dp[0] = 1;
+    for (int i = 1; i * (i + 1) / 2 <= r + g; i++) h = i;
+    if (r > g) swap(r, g);
+    for (int i = 1; i <= h; i++)
+        for (int j = r; j >= i; j--) dp[j] = (dp[j] + dp[j - i]) % mod;
+
+    int ans = 0;
+    for (int i = 0; i <= r; i++)
+        if (h * (h + 1) / 2 - i <= g) ans = (ans + dp[i]) % mod;
+    cout << ans << "\n";
 }
 
 int main() {

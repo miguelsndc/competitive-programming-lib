@@ -21,30 +21,32 @@ using ll = long long;
 constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
+char open(char c) {
+    if (c == ']') return '[';
+    if (c == ')') return '(';
+    if (c == '>') return '<';
+}
+
+char is_open(char c) {
+    return (c == '[' or c == '(' or c == '<');
+}
+
 void solve() {
-    ll n, h;
-    cin >> n >> h;
-    vector<ll> start(n + 1);
-    vector<ll> ps(n + 1);
-    for (int i = 1; i <= n; i++) {
-        int end;
-        cin >> start[i] >> end;
-        ps[i] = ps[i - 1] + end - start[i];
-    }
-    ll ans = 0;
-    for (int i = 1; i <= n; i++) {
-        int l = i, r = n;
-        while (l != r) {
-            int mid = (l + r + 1) / 2;
-            if ((start[mid] - start[i]) - (ps[mid - 1] - ps[i - 1]) < h) {
-                l = mid;
-            } else {
-                r = mid - 1;
-            }
+    string s;
+    cin >> s;
+    stack<char> st;
+    for (char c : s) {
+        if (st.size() and is_open(st.top()) and !is_open(c) and open(c) == st.top()) {
+            st.pop();
+        } else {
+            st.push(c);
         }
-        ans = max(ans, h + (ps[l] - ps[i - 1]));
     }
-    cout << ans << '\n';
+    if (st.empty()) {
+        cout << "Yes\n";
+    } else {
+        cout << "No\n";
+    }
 }
 
 int main() {

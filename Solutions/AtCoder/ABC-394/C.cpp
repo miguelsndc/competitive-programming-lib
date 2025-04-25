@@ -22,29 +22,32 @@ constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
-    ll n, h;
-    cin >> n >> h;
-    vector<ll> start(n + 1);
-    vector<ll> ps(n + 1);
-    for (int i = 1; i <= n; i++) {
-        int end;
-        cin >> start[i] >> end;
-        ps[i] = ps[i - 1] + end - start[i];
-    }
-    ll ans = 0;
-    for (int i = 1; i <= n; i++) {
-        int l = i, r = n;
-        while (l != r) {
-            int mid = (l + r + 1) / 2;
-            if ((start[mid] - start[i]) - (ps[mid - 1] - ps[i - 1]) < h) {
-                l = mid;
-            } else {
-                r = mid - 1;
-            }
+    string s;
+    cin >> s;
+    vector<char> st, aux;
+
+    for (char c : s) {
+        st.push_back(c);
+        while (st.size() > 1 and st[st.size() - 1] == 'A' and st[st.size() - 2] == 'W') {
+            st.pop_back();
+            st.pop_back();
+            aux.push_back('C');
+            aux.push_back('A');
         }
-        ans = max(ans, h + (ps[l] - ps[i - 1]));
+        while (aux.size()) {
+            while (st.size() > 1 and st[st.size() - 1] == 'A' and st[st.size() - 2] == 'W') {
+                st.pop_back();
+                st.pop_back();
+                aux.push_back('C');
+                aux.push_back('A');
+            }
+            st.push_back(aux.back());
+            aux.pop_back();
+        }
     }
-    cout << ans << '\n';
+    for (char c : st) {
+        cout << c;
+    }
 }
 
 int main() {
