@@ -22,19 +22,33 @@ constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    vector<int> h(n);
-    for (int i = 0; i < n; i++) cin >> h[i];
-    ll cost = 0;
-    for (int i = 1; i + 1 < n; i++) {
-        if (h[i - 1] > h[i] and h[i + 1] > h[i]) {
-            ll add_cost = (min(h[i - 1], h[i + 1]) - h[i]) * x;
-            ll rm_cost = (min(h[i - 1], h[i + 1]) - h[i]) * y;
-            cost += min(add_cost, rm_cost);
-        }
+    /*
+        1 and N ganha
+        só o N e não tiver 1 perde
+        N e algum > 1 ganha
+        */
+
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    set<int> a, b;
+    for (int i = 0; i < n; i++) {
+        if (s[i] == 'A')
+            a.insert(i + 1);
+        else
+            b.insert(i + 1);
     }
-    cout << cost << '\n';
+
+    if (a.count(n) and a.count(n - 1)) {
+        cout << "Alice\n";
+    } else if (a.count(n) and a.count(1)) {
+        cout << "Alice\n";
+    } else if (a.count(1) and b.size() == 1) {
+        cout << "Alice\n";
+    } else {
+        cout << "Bob\n";
+    }
 }
 
 int main() {
