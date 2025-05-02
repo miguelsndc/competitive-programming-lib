@@ -20,42 +20,46 @@ using ll = long long;
 
 constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 3e5 + 5;
-vector<pair<int, int>> v(maxn);
 
-#define ff first
-#define ss second
+set<int> color[maxn];
 
 void solve() {
     int n;
     cin >> n;
-    vector<int> colors(n + 1);
-    set<pair<int, int>> s;
+    int a[n + 1] = {0};
     for (int i = 1; i <= n; i++) {
-        cin >> colors[i];
-        v[colors[i]].ff = (v[colors[i]].ff == 0 ? i : min(i, v[colors[i]].ff));
-        v[colors[i]].ss = max(i, v[colors[i]].ss);
+        cin >> a[i];
+        color[a[i]].insert(i);
     }
-    for (int l = 1; l <= n; l++) {
-        int r = l;
-        while (r + 1 <= n and colors[l] == colors[r + 1]) r++;
-        s.insert({l, r});
-        l = r;
-    }
-
     int m;
     cin >> m;
+    int jump[n + 1] = {0};
     while (m--) {
-        int q;
-        cin >> q;
-        auto [first, last] = v[q];
-        auto x = s.lower_bound({first, -1});
-        auto y = s.lower_bound({1e9, last});
-        pair<int, int> new_int = {first, last};
-        auto it = x;
-        while (it != y) {
-            s.erase(it++);
+        int c;
+        cin >> c;
+        if (color[c].size() < 2) continue;
+        int l = *color[c].begin();
+        int r = *color[c].rbegin();
+        for (int i = l; l <= r; i++) {
+            if (jump[i]) i = jump[i];
+            if (i > r) break;
+            color[a[i]].erase(i);
         }
-        s.insert({first, last});
+        jump[l] = r + 1;
+    }
+    for (int i = 1; i <= n;) {
+        cout << a[i] << " \n"[i == n];
+        if (jump[i]) {
+            int cur = a[i];
+            int en = jump[i];
+            i++;
+            while (i < en) {
+                cout << cur << " \n"[i == n];
+                i++;
+            }
+        } else {
+            i++;
+        }
     }
 }
 
