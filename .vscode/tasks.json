@@ -9,7 +9,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "-DCARNEDESOOOL",
-                "-O2",
+                "-O0",
                 "-std=c++23",
                 "${file}",
                 "-o",
