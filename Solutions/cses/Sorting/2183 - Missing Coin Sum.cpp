@@ -2,6 +2,7 @@
 using namespace std;
 
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 
 #ifdef CARNEDESOOOL
 #define debug(...) dbg(#__VA_ARGS__, __VA_ARGS__)
@@ -16,26 +17,26 @@ void dbg(const char* names, T... args) {
 #define debug(...)
 #endif
 
-using i64 = long long;
+using ll = long long;
 
-constexpr i64 inf = 1E18;
+constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
     int n;
     cin >> n;
     vector<int> a(n);
-    for (int i = 0; i < n; i++) cin >> a[i];
-    int m = n, d = n;
-    for (int i = n - 1; i >= 0; i--) {
-        // esse cara foi comido
-        if (i < d) {
-            m--;
+    for (int& x : a) cin >> x;
+    sort(all(a));
+    ll s = 1;
+    for (int i = 0; i < n; i++) {
+        if (a[i] > s) {
+            cout << s << '\n';
+            return;
         }
-        // menor carinha da direita
-        d = min(d, i - a[i]);
+        s += a[i];
     }
-    cout << n - m << '\n';
+    cout << s << '\n';
 }
 
 int main() {

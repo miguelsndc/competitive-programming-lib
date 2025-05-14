@@ -2,6 +2,7 @@
 using namespace std;
 
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 
 #ifdef CARNEDESOOOL
 #define debug(...) dbg(#__VA_ARGS__, __VA_ARGS__)
@@ -16,15 +17,36 @@ void dbg(const char* names, T... args) {
 #define debug(...)
 #endif
 
-using i64 = long long;
+using ll = long long int;
 
-constexpr i64 inf = 1E18;
+constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
-    int a, b;
-    cin >> a >> b;
-    cout << min(a, min(b, (a + b) / 3)) << '\n';
+    int n;
+    ll m;
+    cin >> n >> m;
+    vector<ll> a(n);
+    for (ll& x : a) cin >> x;
+
+    ll l = 0, r = 1e9, ans = 0;
+    while (l <= r) {
+        ll mid = l + (r - l) / 2;
+
+        ll x = 0;
+        for (int i = 0; i < n; i++) {
+            x += (a[i] + 2 * mid) * (a[i] + 2 * mid);
+            if (x > m) break;
+        }
+
+        if (x <= m) {
+            l = mid + 1;
+            ans = mid;
+        } else {
+            r = mid - 1;
+        }
+    }
+    cout << ans << '\n';
 }
 
 int main() {

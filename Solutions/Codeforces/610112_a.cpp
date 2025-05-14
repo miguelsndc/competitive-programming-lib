@@ -2,6 +2,7 @@
 using namespace std;
 
 #define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 
 #ifdef CARNEDESOOOL
 #define debug(...) dbg(#__VA_ARGS__, __VA_ARGS__)
@@ -16,47 +17,39 @@ void dbg(const char* names, T... args) {
 #define debug(...)
 #endif
 
-using i64 = long long;
+using ll = long long;
 
-constexpr i64 inf = 1E18;
+constexpr ll inf = 1E18;
 constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
 
 void solve() {
-    string s, t, p;
-    cin >> s >> t >> p;
-    // remove from p, insert into s so it becomes t
-    map<char, int> freq, freq2;
-    for (char c : s) {
-        freq[c]++;
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
-    for (char c : p) {
-        freq[c]++;
-    }
-    for (char c : t) {
-        freq2[c]++;
-    }
-
-    int i = 0, j = 0;
-    while (i < s.size() and j < t.size()) {
-        if (s[i] == t[j]) {
-            i++, j++;
-        } else {
-            j++;
-        }
-    }
-
-    if (i < s.size()) {
-        cout << "NO\n";
+    if (count(all(a), 0) == a.size()) {
+        cout << 0 << '\n';
         return;
     }
 
-    for (auto [ch, fr] : freq2) {
-        if (freq[ch] < fr) {
-            cout << "NO\n";
-            return;
+    int cnt = 0, cur = 0;
+    for (int i = 0; i < n; i++) {
+        if (a[i] > 0)
+            cur++;
+        else if (a[i] == 0 and cur > 0) {
+            cnt++;
+            cur = 0;
         }
     }
-    cout << "YES\n";
+    if (cur > 0) cnt++;
+    if ((cnt == 1) || (count(all(a), 0) == 0)) {
+        cout << 1 << '\n';
+        return;
+    }
+
+    cout << 2 << '\n';
 }
 
 int main() {
