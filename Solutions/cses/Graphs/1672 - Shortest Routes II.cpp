@@ -15,34 +15,41 @@ using namespace std;
 #define s second
 #define sp << " " <<
 #define spe << " "
-#define INF 1e18
 
+#define INF 1e18
 int main() {
+    ll n, m, q, a, b, w;
+    cin >> n >> m >> q;
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int n, m, q; cin >> n >> m >> q;
-    vector<vll> d(505, vll(505, INF));
+    vector<vll> distance(n + 1, vll(n + 1, INF));
 
-    for (int i = 1; i <= n; i++) d[i][i] = 0;
-
-    for (int i = 1, a, b, w; i <= m; i++) {
+    for (int i = 1; i <= m; i++) {
         cin >> a >> b >> w;
-        d[a][b] = d[b][a] = min(d[a][b], (ll) w);
+        if (w < distance[a][b]) {
+            distance[a][b] = distance[b][a] = w;
+        }
     }
+
+    for (int i = 1; i <= n; i++) distance[i][i] = 0;
 
     for (int k = 1; k <= n; k++) {
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
-                d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+                distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j]);
             }
         }
     }
 
-    for (int i = 0; i < q; i++) {
-        int y, x; cin >> y >> x;
-        if (d[y][x] == INF) d[y][x] = -1;
-        cout << d[y][x] << '\n';
+    for (ll i = 1; i <= q; i++) {
+        cin >> a >> b;
+        if (distance[a][b] == INF) {
+            distance[a][b] = -1;
+        } else if (a == b) {
+            distance[a][b] = 0;
+        }
+        cout << distance[a][b] << '\n';
     }
-    
+
     return 0;
 }
