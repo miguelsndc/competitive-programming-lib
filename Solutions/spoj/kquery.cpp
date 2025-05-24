@@ -25,7 +25,6 @@ constexpr int mod = 1e9 + 7, maxn = 3e4 + 5;
 
 int n;
 vector<int> tree[4 * maxn], a;
-
 void build(int l = 0, int r = n - 1, int v = 0) {
     if (l == r) {
         tree[v].push_back(a[l]);
