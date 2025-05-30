@@ -1,9 +1,12 @@
-/*
-O(V²E) in general graphs. u
-nit capacity networks, it's O(min(V^2/3, E^1/2))
-(source/sink only connected to one side of a bipartite graph), it's O(EV).
-usually much faster than worst case
-*/
+#include <bits/stdc++.h>
+using namespace std;
+
+template <typename T>
+using vc = vector<T>;
+using ll = long long;
+const int maxn = 2e5 + 5;
+const ll inf = 1e18;
+namespace rg = std::ranges;
 
 struct Edge {
     int u, v;
@@ -73,3 +76,51 @@ struct Dinic {
         return f;
     }
 };
+
+void dfs(int u, const Dinic &dinic, vc<bool> &reached) {
+    reached[u] = true;
+    for (int id : dinic.adj[u]) {
+        const Edge &e = dinic.edges[id];
+        if (!reached[e.v] and e.cap > e.flow) {
+            dfs(e.v, dinic, reached);
+        }
+    }
+};
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    int src = 0, sink = n - 1;
+    Dinic d(n, src, sink);
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        --a, --b;
+        auto [x, y] = minmax(a, b);
+        d.add_edge(x, y, 1, 1);
+    }
+    ll flow = d.flow();
+    vc<bool> reached(n);
+    dfs(d.s, d, reached);
+    vc<pair<int, int>> min_cut;
+    for (int i = 0; i < d.m; i++) {
+        const Edge &e = d.edges[i];
+        if (reached[e.u] and !reached[e.v] and e.cap == e.flow) {
+            min_cut.emplace_back(e.u, e.v);
+        }
+    }
+    sort(min_cut.begin(), min_cut.end());
+
+    cout << min_cut.size() << '\n';
+    for (auto [x, y] : min_cut) {
+        cout << x + 1 << ' ' << y + 1 << '\n';
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int tt = 1;  // cin >> tt;
+    while (tt--) solve();
+}

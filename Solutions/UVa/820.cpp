@@ -1,9 +1,13 @@
-/*
-O(V²E) in general graphs. u
-nit capacity networks, it's O(min(V^2/3, E^1/2))
-(source/sink only connected to one side of a bipartite graph), it's O(EV).
-usually much faster than worst case
-*/
+#include <bits/stdc++.h>
+using namespace std;
+
+template <typename T>
+using vc = vector<T>;
+using ll = long long;
+const int maxn = 2e5 + 5;
+const ll inf = 1e18;
+
+// namespace rg = std::ranges;
 
 struct Edge {
     int u, v;
@@ -73,3 +77,30 @@ struct Dinic {
         return f;
     }
 };
+
+int cnt = 1;
+void solve(int n) {
+    int s, t, c;
+    cin >> s >> t >> c;
+    --s, --t;
+    Dinic d(n, s, t);
+    for (int i = 0; i < c; i++) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        --u, --v;
+        d.add_edge(u, v, w, w);
+    }
+    ll mf = d.flow();
+    cout << "Network " << cnt++ << "\n";
+    cout << "The bandwidth is " << mf << ".\n\n";
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int n;
+    while ((cin >> n) and (n > 0)) {
+        solve(n);
+    }
+}
