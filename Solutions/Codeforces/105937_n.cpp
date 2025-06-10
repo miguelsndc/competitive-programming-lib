@@ -35,8 +35,8 @@ int query(int a, int b, int l = 0, int r = sz - 1, int v = 0) {
 }
 
 void update(int pos, int val, int l = 0, int r = sz - 1, int v = 0) {
+    tree[v] = val;
     if (l == r) {
-        tree[v] = val;
         return;
     } else {
         int mid = l + (r - l) / 2;
