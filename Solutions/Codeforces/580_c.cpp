@@ -1,20 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long int
-#define MOD 1000000007
-#define ii pair<int, int>
-#define vi vector<int>
-#define fi first
-#define se second
-#define rep(var, k, n) for (int var = k; var < n; var++)
-#define repi(var, k, n) for (int var = k; var <= n; var++)
-#define se second
+using ll = long long;
 const int maxn = 1e5 + 5;
 
-vi is_cat(maxn);
-vi g[maxn];
-vi out(maxn);
+vector<int> is_cat(maxn), g[maxn];
 int n, m;
 ll cnt = 0;
 
@@ -34,14 +24,13 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cin >> n >> m;
-    rep(i, 1, n + 1) cin >> is_cat[i];
-    rep(i, 0, n - 1) {
+    for (int i = 0; i < n; i++) cin >> is_cat[i];
+    for (int i = 0; i < n - 1; i++) {
         int a, b;
         cin >> a >> b;
-        g[a].push_back(b);
+        g[--a].push_back(--b);
         g[b].push_back(a);
-        out[a]++, out[b]++;
     }
-    dfs(1, -1, is_cat[1]);
+    dfs(0, -1, is_cat[0]);
     cout << cnt;
 }
