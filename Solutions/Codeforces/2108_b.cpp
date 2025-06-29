@@ -14,20 +14,32 @@ const ll inf = 1e18;
 void solve() {
     int n, x;
     cin >> n >> x;
-
-    auto print_b = [&](int x) {
-        string s = "";
-        for (int i = 0; i < 32 - __builtin_clz(x); i++) {
-            if (x & (1 << i)) {
-                s += '1';
+    /*
+     */
+    int bits = __builtin_popcount(x);
+    if (n <= bits) {
+        cout << x << '\n';
+        return;
+    }
+    if ((n - bits) % 2 == 0) {
+        cout << x + n - bits << '\n';
+    } else {
+        if (x > 1) {
+            cout << x + n - bits + 1 << "\n";
+            return;
+        }
+        if (x == 1) {
+            cout << n + 3 << '\n';
+            return;
+        } else {
+            if (n == 1) {
+                cout << -1 << '\n';
+                return;
             } else {
-                s += '0';
+                cout << n + 3 << '\n';
             }
         }
-        reverse(all(s));
-        cout << n << ' ' << s << '\n';
-    };
-    print_b(x);
+    }
 }
 
 int main() {
