@@ -5,31 +5,28 @@
         - unite(u) O(alpha(n))
 */
 
-const int MAXN = 2e5 +5;
-template<typename T>
+template <typename T>
 struct UnionFind {
-    int parents[MAXN];
-    int sizes[MAXN];
+    vector<int> par, sz;
 
     // O(n)
-    void init(int n) {
-        for (int i = 1; i <= n; i++) {
-            parents[i] = i;
-            sizes[i] = 1;
-        }
+    UnionFind(int n) {
+        par.assign(n, 0);
+        sz.assign(n, 1);
+        iota(par.begin(), par.end(), 0);
     }
-    
+
     // O(alpha(n)) ~ O(1)
-    int find(int x) { return parents[x] == x ? x : (parents[x] = find(parents[x])); }
-    
+    int find(int x) { return par[x] == x ? x : (par[x] = find(par[x])); }
+
     // O(alpha(n)) ~ O(1)
     bool unite(int x, int y) {
         int x_root = find(x);
         int y_root = find(y);
         if (x_root == y_root) { return false; }
-        if (sizes[x_root] < sizes[y_root]) { swap(x_root, y_root); }
-        sizes[x_root] += sizes[y_root];
-        parents[y_root] = x_root;
-        return true; // (some condition met for component);
+        if (sz[x_root] < sz[y_root]) { swap(x_root, y_root); }
+        sz[x_root] += sz[y_root];
+        par[y_root] = x_root;
+        return true;  // (some condition met for component);
     }
 };
