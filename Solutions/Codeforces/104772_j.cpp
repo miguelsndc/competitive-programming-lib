@@ -10,5 +10,14 @@ int main() {
     vector<int> a(n), b(n);
     for (int i = 0; i < n; i++) cin >> a[i];
     for (int i = 0; i < n; i++) cin >> b[i];
-    
+    set<int> s;
+    for (int i = 0; i < n; i++) {
+        int x = a[i];
+        int lb = (lower_bound(b.begin(), b.end(), x) - b.begin());
+        s.insert(lb);
+    }
+    cout << s.size() << '\n';
+    for (int x: s) {
+        cout << x << ' ';
+    }
 }
