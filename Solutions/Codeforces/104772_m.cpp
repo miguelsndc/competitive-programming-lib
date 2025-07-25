@@ -33,6 +33,7 @@ int main() {
             }
         }
     }
+    while(j < f.size()) ok &= vowel(f[j++]);
     if (i == s.size() and ok) {
         cout << "Same";
     } else {
