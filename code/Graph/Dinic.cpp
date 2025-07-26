@@ -4,18 +4,19 @@ nit capacity networks, it's O(min(V^2/3, E^1/2))
 (source/sink only connected to one side of a bipartite graph), it's O(EV).
 usually much faster than worst case
 */
-
+typedef long long ll;
 struct Edge {
     int u, v;
     ll cap, flow = 0;
     Edge(int u, int v, ll cap) : u(u), v(v), cap(cap) {}
 };
 
+template<typename T>
 struct Dinic {
-    vc<Edge> edges;
-    vc<vc<int>> adj;
+    vector<Edge> edges;
+    vector<vector<int>> adj;
     int n, s, t, m = 0;
-    vc<int> lvl, ptr;
+    vector<int> lvl, ptr;
     queue<int> q;
     Dinic(int n, int s, int t) : n(n), s(s), t(t) {
         adj.resize(n);
