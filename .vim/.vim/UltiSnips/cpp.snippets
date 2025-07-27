@@ -1,0 +1,52 @@
+snippet cpp "template"
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define all(x) (x).begin(), (x).end()
+
+void IO(string str) {
+	string inp = str + ".in";
+	string outp  = str + ".out";
+	freopen(inp, "r", stdin);
+	freopen(outp, "w", stdou);
+}
+
+int solve() {
+	$0
+	return 0;
+}
+
+int32_t main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int tt; // cin >> tt;
+	for (int i = 1; i <= tt; i++) {
+		if(solve()) break;
+		#ifdef DEBUG
+			cout << "__________________________" << endl;
+		#endif
+	}
+	#ifdef DEBUG
+		cerr << endl << "finished in " << clock() * 1.0 / CLOCKS_PER_SEC << " sec" << endl;
+	#endif
+}
+endsnippet
+
+
+snippet minimal "minimal template"
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define all(x) (x).begin(), (x).end()
+int32_t main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	$0
+}
+endsnippet
+
+snippet { "block"
+{
+	$0
+}
+endsnippet
