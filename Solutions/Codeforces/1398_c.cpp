@@ -1,56 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+typedef long long ll;
 #define all(x) (x).begin(), (x).end()
-
-#ifdef CARNEDESOOOL
-#define debug(...) dbg(#__VA_ARGS__, __VA_ARGS__)
-template <typename... T>
-void dbg(const char* names, T... args) {
-    const char* p = names;
-    ((cout << string(p, strchr(p, ',') ? strchr(p, ',') : p + strlen(p)) << " = " << args << '\n',
-      p = strchr(p, ',') ? strchr(p, ',') + 1 : p + strlen(p)),
-     ...);
-}
-#else
-#define debug(...)
-#endif
-
-using ll = long long;
-
-constexpr ll inf = 1E18;
-constexpr int mod = 1e9 + 7, maxn = 2e5 + 5;
-
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; i++) {
-        char c;
-        cin >> c;
-        a[i] = c - '0';
-    }
-    vector<ll> ps(n + 1);
-    for (int i = 0; i < n; i++) {
-        ps[i + 1] = ps[i] + a[i];
-    }
-    map<ll, ll> mp;
-    for (int i = 0; i < n + 1; i++) {
-        mp[ps[i] - i]++;
-    }
-    ll cnt = 0;
-    for (auto [x, c] : mp) {
-        cnt += c * (c - 1) / 2;
-    }
-    cout << cnt << '\n';
-}
-
-int main() {
-    ios_base::sync_with_stdio(0);
+int32_t main() {
+    ios::sync_with_stdio(0);
     cin.tie(0);
-    int tt = 1;
-    cin >> tt;
-    while (tt--) {
-        solve();
+    int tt; cin >> tt;
+    while(tt--) {
+        int n; cin >> n;
+        string s; cin >> s;
+        vector<int> ps(n + 1);
+        for (int i = 0; i < n; i++) {
+            int x = (int)(s[i] - '0');
+            ps[i + 1] = ps[i] + x;
+        }
+        map<int, ll> mp;
+        for (int i = 0; i <= n; i++) {
+            mp[ps[i] - i]++;
+        }
+        ll ans = 0;
+        for (auto [x, c]: mp) {
+            ans += c * (c - 1) / 2;
+        }
+        cout << ans << '\n';
     }
 }
