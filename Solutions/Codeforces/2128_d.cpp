@@ -2,28 +2,26 @@
 using namespace std;
 typedef long long ll;
 #define all(x) (x).begin(), (x).end()
-int32_t main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int tt; cin >> tt;
-    while(tt--) {
-        int n; cin >> n;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        int n;
+        cin >> n;
         vector<int> p(n);
-        for (int &x:p) cin >> x;
-        vector<int> lds(n, 1);
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (p[i] < p[j] and lds[i] < lds[j] + 1) {
-                    lds[i] = lds[j] + 1;
-                }
+        for (int i = 0; i < n; i++) cin >> p[i];
+        vector<ll> dp(n + 1);
+        dp[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            if (p[i] > p[i + 1]) {
+                dp[i] = dp[i + 1] + n - i;  // numero de lds começando em i + 1 + numero de vezes que pi aparece na lds
+            } else {
+                dp[i] = dp[i + 2] + n - i;
             }
         }
-        ll ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                ans += abs(lds[i] - lds[j]);
-            }
-        }
-        cout << ans + n<< '\n';
+        cout << accumulate(all(dp), 0LL) << '\n';
     }
 }
