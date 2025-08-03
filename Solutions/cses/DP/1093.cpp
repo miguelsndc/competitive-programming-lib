@@ -1,25 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-const ll mod = 1e9 + 7;
-const ll inv2 = 500000004;
+const int inv2 = 500000004;
 void solve() {
     ll n; cin >> n;
-    ll sum = n * (n + 1) / 2;
-    if (sum % 2) {
-        cout << 0 << '\n';
-        return;
-    }
-    vector<ll> dp(sum + 1);
-    dp[0] = 1;
-    for (ll x = 1; x <= n; x++) {
-        for (ll s = sum; s >= x; s--) {
-            (dp[s] += dp[s - x]) %= mod;
+    ll s = n * (n + 1) / 2;
+    ll f[s + 1] = {0}, mod = 1e9 + 7;
+    f[0] = 1;
+    for (int x = 1; x <= n; x++) {
+        for (int y = s; y >= x; y--) {
+            (f[y] += f[y - x]) %= mod;
         }
     }
-    cout << dp[sum / 2] * inv2 % mod << '\n';
+    if (s & 1) {
+        cout << 0 << '\n';
+    } else {
+        cout << (f[s / 2] * inv2) % mod;
+    }
 }
 int main() {
-    int T = 1; // cin >> t;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int T = 1; // cin >> T;
     while(T--) solve();
 }

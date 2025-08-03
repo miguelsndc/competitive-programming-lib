@@ -1,51 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-using ll = long long;
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
-#define rdvec(v, n) \
-    for (int i = 0; i < n; i++) cin >> v[i];
-
-#define vc vector
-
+typedef long long ll;
+const int mod = 1e9 + 7;
 void solve() {
+    /*
+        se i != 0 entao so pode chegar de i-1, i ou i + 1
+        se i = 0 a gnt n sabe ele
+        entao so pega de todo mundo
+    */
     int n, m;
     cin >> n >> m;
-    vector f(n + 5, vector<ll>(m + 5));
-    vector<ll> a(n + 1);
-    for (int i = 1; i <= n; i++) cin >> a[i];
-
-    if (a[1] == 0) {
-        for (int i = 1; i <= m; i++) f[1][i] = 1;
+    ll f[n + 1][m + 2], a[n];
+    memset(f, 0, sizeof f);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    if (a[0] == 0) {
+        fill(f[0], f[0] + m + 2, 1);
+        f[0][0] = f[0][m+1] = 0;
     } else {
-        f[1][a[1]] = 1;
+        f[0][a[0]] = 1;
     }
-
-    const int mod = 1e9 + 7;
-    for (int i = 2; i <= n; i++) {
-        for (int j = 1; j <= m; j++) {
-            if (a[i] == 0) {
-                f[i][j] = (f[i - 1][j] + f[i - 1][j - 1] + f[i - 1][j + 1]) % mod;
-            } else if (j == a[i]) {
-                f[i][j] = (f[i - 1][j] + f[i - 1][j - 1] + f[i - 1][j + 1]) % mod;
+    for (int i = 1; i < n; i++) {
+        if (a[i] != 0) {
+            (f[i][a[i]] = (f[i][a[i]] + f[i - 1][a[i] - 1] + f[i - 1][a[i]] + f[i - 1][a[i] + 1])) %= mod;
+        } else {
+            for (int j = 1; j <= m; j++) {
+                (f[i][j] = (f[i][j] + f[i - 1][j - 1] + f[i - 1][j] + f[i - 1][j + 1])) %= mod;
             }
         }
     }
-
     ll ans = 0;
-    for (int i = 1; i <= m; i++) {
-        ans += (f[n][i]);
-        ans %= mod;
+    for (int j =0; j <= m; j++) {
+        (ans += f[n - 1][j]) %= mod;
     }
-
     cout << ans << '\n';
 }
-
-int32_t main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     int T = 1;  // cin >> T;
     while (T--) solve();
 }

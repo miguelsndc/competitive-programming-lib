@@ -1,36 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-using ll = long long;
-const int maxn = 1e5 + 5;
-
-vector<int> is_cat(maxn), g[maxn];
-int n, m;
-ll cnt = 0;
-
-void dfs(int u, int p, int curr) {
-    if (curr > m) return;
-    int ok = 1;
-    for (int v : g[u]) {
-        if (v != p) {
-            ok = 0;
-            dfs(v, u, curr * is_cat[u] + is_cat[v]);
-        }
+typedef long long ll;
+void solve() {
+    int n, m; cin >> n >> m;
+    vector<int> cat(n);
+    vector<vector<int>> g(n);
+    for (int i = 0; i < n; i++) {
+        cin >> cat[i];
     }
-    cnt += ok;
-}
-
-int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cin >> n >> m;
-    for (int i = 0; i < n; i++) cin >> is_cat[i];
     for (int i = 0; i < n - 1; i++) {
-        int a, b;
-        cin >> a >> b;
-        g[--a].push_back(--b);
-        g[b].push_back(a);
+        int u, v; cin >> u >> v;
+        g[--u].push_back(--v);
+        g[v].push_back(u);
     }
-    dfs(0, -1, is_cat[0]);
-    cout << cnt;
+
+    int ans = 0;
+    auto dfs = [&](auto &&f, int u, int p, int cnt) {
+        if (cnt > m) return;
+        for (int v: g[u]) {
+            if (v == p) continue;
+            f(f, v, u, cnt * cat[u] + cat[v]);
+        }
+        if (g[u].size() == 1 and g[u].back() == p)ans++;
+    };
+
+    dfs(dfs, 0, -1, cat[0]);
+
+    cout << ans << '\n';
+}
+int32_t main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int T = 1; // cin >> T;
+    while(T--) solve();
 }
